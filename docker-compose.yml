@@ -1,0 +1,18 @@
+api:
+  build: .
+  expose:
+    - 3000
+  links:
+    - mongo:db
+  environment:
+    - PORT=3000
+    - DB_DOMAIN=db
+    - DB_PORT=27017
+  ports:
+    - 3000:3000
+  restart: always
+mongo:
+  image: mongo:3.4
+  expose:
+    - 27017
+  restart: always
