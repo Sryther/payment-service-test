@@ -1,4 +1,26 @@
-# Payment Service Test
+# Summary
+
+1. Setup the environment and the cluster
+2. Setup the Payment Service
+
+# Setup the environment and the cluster
+
+## Vagrant
+
+    vagrant up
+    
+List of files:
+
+- Vagrantfile
+- provision.sh
+
+## Ansible
+
+List of files:
+
+- toto
+
+# Setup the Payment Service
 
 ## Technology
 
