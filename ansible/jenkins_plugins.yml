@@ -1,0 +1,118 @@
+#Connecting Jenkins Server
+- name: Obtaining a list of plugins
+ jenkins_script:
+   script: 'println(Jenkins.instance.pluginManager.plugins)'
+   user: admin
+   password: admin
+   url: http://127.0.0.1:8080
+
+#Install Plugins
+- name: Install Docker plugin
+ jenkins_plugin:
+   name: docker-plugin
+   version: "0.16.1"
+
+- name: Install Cloudbees folder plugin
+ jenkins_plugin:
+   name: cloudbees-folder
+
+- name: Install Antisamy Markup Formatter plugin
+ jenkins_plugin:
+   name: antisamy-markup-formatter
+
+- name: Install Build Timeout plugin
+ jenkins_plugin:
+   name: build-timeout
+
+- name: Install Credentials Binding plugin
+ jenkins_plugin:
+   name: credentials-binding
+
+- name: Install Timestamper plugin
+ jenkins_plugin:
+   name: timestamper
+
+- name: Install WS Cleanup plugin
+ jenkins_plugin:
+   name: ws-cleanup
+
+- name: Install Ant plugin
+ jenkins_plugin:
+   name: ant
+
+- name: Install Gradle plugin
+ jenkins_plugin:
+   name: gradle
+
+- name: Install Workflow Aggregator plugin
+ jenkins_plugin:
+   name: workflow-aggregator
+
+- name: Install GitHub Organization Folder plugin
+ jenkins_plugin:
+   name: github-organization-folder
+
+- name: Install Pipeline Stage View plugin
+ jenkins_plugin:
+   name: pipeline-stage-view
+
+- name: Install Git plugin
+ jenkins_plugin:
+   name: git
+
+- name: Install Subversion plugin
+ jenkins_plugin:
+   name: subversion
+
+- name: Install SSH Slaves plugin
+ jenkins_plugin:
+   name: ssh-slaves
+
+- name: Install Matrix Auth plugin
+ jenkins_plugin:
+   name: matrix-auth
+
+- name: Install PAM Auth plugin
+ jenkins_plugin:
+   name: pam-auth
+
+- name: Install LDAP plugin
+ jenkins_plugin:
+   name: ldap
+
+- name: Install Email Ext plugin
+ jenkins_plugin:
+   name: email-ext
+
+- name: Install Mailer plugin
+ jenkins_plugin:
+   name: mailer
+
+#reboot after install (if needed)
+- name: Restart Jenkins if required
+ service:
+   name: jenkins
+   state: restarted
+ when: jenkins_restart_required
+
+#Check startup
+- name: Wait for Jenkins to start up
+ uri:
+   url: http://localhost:8080
+   status_code: 200
+   timeout: 5
+ register: jenkins_service_status
+ retries: 60
+ delay: 5
+ until: >
+    'status' in jenkins_service_status and
+    jenkins_service_status['status'] == 200
+ when: jenkins_restart_required
+
+#END Connexion
+- jenkins_job:
+   name: test
+   user: admin
+   password: admin
+   enabled: False
+   url: http://127.0.0.1:8080
