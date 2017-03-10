@@ -1,7 +1,20 @@
 # Summary
 
-1. Setup the environment and the cluster
-2. Setup the Payment Service
+- Expected workflow
+- Setup the environment and the cluster
+- Setup the Payment Service
+
+# Expected repository/project workflow
+
+1. Commit changes on this repository.
+2. Jenkins do a build every 10 minutes (this is just for debugging` we usually want to build when a push is done)
+3. Jenkins pulls the changes of this repository
+4. Jenkins runs tests
+5. If the tests are successful and above 80%, Jenkins builds a new image
+6. If the image is built, Jenkins pushes the image to the private Docker registry (`127.0.0.1:5000)
+
+This job configuration can be found at `jenkins/jobs/payment-service-jenkins-job.xml` where the Docker workflow is 
+explained.
 
 # Setup the environment and the cluster
 
@@ -18,7 +31,10 @@ List of files:
 
 List of files:
 
-- toto
+- ansible/ansible-script.py
+- ansible/jenkins_plugins.yml
+
+N.B.: This script doesn't work... We tried to install the Jenkins plugins with Ansible.
 
 # Setup the Payment Service
 
@@ -39,6 +55,9 @@ List of files:
 ### Prepare the environment
 
     npm install
+    
+If the environment variable `NODE_ENV` is equal to `production`, only the production packages/dependencies will be 
+downloaded.
     
 ### Defaults
 
@@ -75,13 +94,17 @@ If you want to use a different port or database :
     
 #### Using docker-compose
 
-The configuration can be edited in the `docker-compose.yml` file.
+With this way you can test our Payment Service REST API easily. You just have to run the following command.
 
     docker-compose up
     
 In detached mode:
 
     docker-compose up -d
+    
+If you didn't change the `docker-compose.yml` file, you will be able to contact the service using the address 
+`POST http://127.0.0.1:3000/order/process`
+The configuration can be edited in the `docker-compose.yml` file.
     
 ## Tests
 
