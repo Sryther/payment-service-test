@@ -1,0 +1,25 @@
+---
+  - name: Install Docker plugin
+    jenkins_plugin:
+      name: docker-plugin
+      params: "{{ my_jenkins_params }}"
+
+  - name: Install Docker Build Step plugin
+    jenkins_plugin:
+      name: docker-build-step
+      params: "{{ my_jenkins_params }}"
+
+  - name: Install Build Timeout plugin
+    jenkins_plugin:
+      name: build-timeout
+      params: "{{ my_jenkins_params }}"
+
+  - name: Install Credentials Binding plugin
+    jenkins_plugin:
+      name: credentials-binding
+      params: "{{ my_jenkins_params }}"
+
+  - name: Install Git plugin
+    jenkins_plugin:
+      name: git
+      params: "{{ my_jenkins_params }}"

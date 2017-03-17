@@ -31,10 +31,12 @@ List of files:
 
 List of files:
 
-- ansible/ansible-script.py
-- ansible/jenkins_plugins.yml
+- ansible/configure-ci-server.yml
 
-N.B.: This script doesn't work... We tried to install the Jenkins plugins with Ansible.
+If you have to install manually:
+
+    vagrant ssh
+    sudo ansible-playbook /vagrant/ansible/configure-ci-server.yml
 
 # Setup the Payment Service
 

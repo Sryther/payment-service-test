@@ -1,0 +1,13 @@
+---
+- name: Configure CI server
+  hosts: 127.0.0.1
+  sudo: True
+  vars:
+    my_jenkins_params:
+          url_username: admin
+          url_password: admin
+          url: http://127.0.0.1:8080
+  roles:
+    - git
+    - geerlingguy.jenkins
+    - jenkins_plugin
