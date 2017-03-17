@@ -34,7 +34,6 @@ ansible-galaxy install geerlingguy.jenkins -p /vagrant/ansible/roles/
 ansible-playbook /vagrant/ansible/configure-ci-server.yml
 
 # Add the configurations
-cp /vagrant/jenkins/configuration/com.nirima.jenkins.plugins.docker.DockerPluginConfiguration.xml /var/lib/jenkins/com.nirima.jenkins.plugins.docker.DockerPluginConfiguration.xml
 cp /vagrant/jenkins/configuration/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml /var/lib/jenkins/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml
 
 # Add the pre-configured job
