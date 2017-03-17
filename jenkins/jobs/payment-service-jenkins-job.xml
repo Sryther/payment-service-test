@@ -35,8 +35,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install
-npm test</command>
+      <command>docker run -d --name mongo-test -p 27017:27017 mongo --smallfiles
+npm install
+npm test
+docker rm -f mongo-test</command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.40">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
