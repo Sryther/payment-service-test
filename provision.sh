@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 # Install global dependencies
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update
-apt-get install -y curl wget
+apt-get install -y curl wget nodejs
 
 # ==================================
 # DOCKER
@@ -35,6 +36,7 @@ ansible-playbook /vagrant/ansible/configure-ci-server.yml
 
 # Add the configurations
 cp /vagrant/jenkins/configuration/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml /var/lib/jenkins/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml
+cp /vagrant/jenkins/configuration/jenkins.plugins.nodejs.tools.NodeJSInstallation.xml /var/lib/jenkins/jenkins.plugins.nodejs.tools.NodeJSInstallation.xml
 
 # Add the pre-configured job
 mkdir -p /var/lib/jenkins/jobs/payment-service

@@ -8,3 +8,8 @@
     jenkins_plugin:
       name: git
       params: "{{ my_jenkins_params }}"
+
+  - name: Install NodeJs plugin
+    jenkins_plugin:
+      name: nodejs
+      params: "{{ my_jenkins_params }}"
