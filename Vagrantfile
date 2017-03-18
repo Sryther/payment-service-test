@@ -13,8 +13,10 @@ Vagrant.configure("2") do |config|
     vb.memory = "1024"
   end
 
-  config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "hyperv" do |hv|
     config.vm.synced_folder ".", "/vagrant", type: "smb"
+    hv.ip_address_timeout = 240
+    vb.memory = "1024"
   end
 
   config.vm.provision :shell, :path => "provision.sh"
