@@ -6,12 +6,12 @@
 
 # Expected repository/project workflow
 
-1. Commit changes on this repository.
-2. Jenkins do a build every 10 minutes (this is just for debugging` we usually want to build when a push is done)
-3. Jenkins pulls the changes of this repository
-4. Jenkins runs tests
-5. If the tests are successful and above 80%, Jenkins builds a new image
-6. If the image is built, Jenkins pushes the image to the private Docker registry (`127.0.0.1:5000)
+- [x] 1. Commit changes on this repository.
+- [x] 2. Jenkins do a build every 10 minutes (this is just for debugging` we usually want to build when a push is done)
+- [x] 3. Jenkins pulls the changes of this repository
+- [x] 4. Jenkins runs tests
+- [ ] 5. If the tests are successful and above 80%, Jenkins builds a new image
+- [x] 6. If the image is built, Jenkins pushes the image to the private Docker registry (`127.0.0.1:5000)
 
 This job configuration can be found at `jenkins/jobs/payment-service-jenkins-job.xml` where the Docker workflow is 
 explained.
