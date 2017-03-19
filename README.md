@@ -11,34 +11,35 @@
 - [x] 3. Jenkins pulls the changes of this repository
 - [x] 4. Jenkins runs tests
 - [ ] 5. If the tests are successful and above 80%, Jenkins builds a new image
-- [x] 6. If the image is built, Jenkins pushes the image to the private Docker registry (`127.0.0.1:5000)
+- [x] 6. If the image is built, Jenkins pushes the image to the private Docker registry (`127.0.0.1:5000`)
 
 This job configuration can be found at `jenkins/jobs/payment-service-jenkins-job.xml` where the Docker workflow is 
 explained.
 
 # Setup the environment and the cluster
 
-## Vagrant
+## Entrypoint
+
+Just run the following command:
 
     vagrant up
     
-List of files:
+If you want to use another provider than VirtualBox:
 
-- Vagrantfile
-- provision.sh
+    vagrant up --provider {provider}
+    vagrant up --provider hyperv
+    
+It will install:
 
-## Ansible
+- Docker
+- Ansible
+- Run an Ansible playbook:
+    - Install Jenkins
+    - Install Jenkins plugins
+    - Pre-configure the job
+- Run the Jenkins on the http://{ip}:8080
 
-List of files:
-
-- ansible/configure-ci-server.yml
-
-If you have to install manually:
-
-    vagrant ssh
-    sudo ansible-playbook /vagrant/ansible/configure-ci-server.yml
-
-# Setup the Payment Service
+# Setup the Payment Service (REST API)
 
 ## Technology
 
