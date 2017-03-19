@@ -108,7 +108,39 @@ In detached mode:
 If you didn't change the `docker-compose.yml` file, you will be able to contact the service using the address 
 `POST http://127.0.0.1:3000/order/process`
 The configuration can be edited in the `docker-compose.yml` file.
-    
+
+## Hubot install :
+
+### Required Node.js et npm : 
+
+    Sudo apt-get install nodejs
+    Sudo apt-get install nodejs-legacy
+    Sudo apr-get install npm
+
+### Generator install:
+
+    Sudo npm -g yo generator-hubot
+    Npm install generator-angular
+    Npm install generator-karma@>=0.9.0
+
+### Persistence :
+
+    Npm install hubot-redis-brain
+
+### Creating bot folder :
+
+    Cd Documents
+    Mkdir jarvis
+    Cd jarvis
+
+### Creating bot : 
+
+    Yo hubot
+
+### Running :
+
+    Bin/hubot
+        
 ## Tests
 
     npm test
