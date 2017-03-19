@@ -34,12 +34,38 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.40">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
+        <image>mongo</image>
+        <command>--smallfiles</command>
+        <hostName></hostName>
+        <containerName>mongo-payment-service-$BUILD_NUMBER</containerName>
+        <envVars></envVars>
+        <links></links>
+        <exposedPorts></exposedPorts>
+        <cpuShares></cpuShares>
+        <memoryLimit></memoryLimit>
+        <dns></dns>
+        <extraHosts></extraHosts>
+        <publishAllPorts>false</publishAllPorts>
+        <portBindings>27017:27017</portBindings>
+        <bindMounts></bindMounts>
+        <privileged>false</privileged>
+        <alwaysRestart>false</alwaysRestart>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
-      <command>docker run -d --name mongo-$BUILD_NUMBER -p 27017:27017 mongo --smallfiles
-npm install
-npm test
-docker rm -f mongo-$BUILD_NUMBER</command>
+      <command>npm install
+npm test</command>
     </hudson.tasks.Shell>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.40">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveCommand">
+        <containerIds>mongo-payment-service-$BUILD_NUMBER</containerIds>
+        <ignoreIfNotFound>false</ignoreIfNotFound>
+        <removeVolumes>false</removeVolumes>
+        <force>false</force>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.40">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateImageCommand">
         <dockerFolder>$WORKSPACE/</dockerFolder>

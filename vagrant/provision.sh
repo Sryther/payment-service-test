@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 # Install global dependencies
+apt-get update
+apt-get install -y curl wget
+
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get update
-apt-get install -y curl wget nodejs
+apt-get install -y nodejs npm
 
 # ==================================
 # DOCKER
@@ -32,7 +35,7 @@ apt-get install -y ansible
 
 # Launch the playbook
 ansible-galaxy install geerlingguy.jenkins -p /vagrant/ansible/roles/
-ansible-playbook /vagrant/ansible/configure-ci-server.yml
+ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python2 ansible-playbook /vagrant/ansible/configure-ci-server.yml
 
 # Add the configurations
 cp /vagrant/jenkins/configuration/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml /var/lib/jenkins/org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml
@@ -44,6 +47,10 @@ cp /vagrant/jenkins/jobs/payment-service-jenkins-job.xml /var/lib/jenkins/jobs/p
 
 # Set the owner to jenkins
 chown -R jenkins:jenkins /var/lib/jenkins
+
+# Add jenkins to the Docker group
+gpasswd -a jenkins docker
+service docker restart
 
 # Restart the service
 service jenkins restart

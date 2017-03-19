@@ -1,15 +1,19 @@
 ---
-  - name: Install Docker Build Step plugin
-    jenkins_plugin:
-      name: docker-build-step
-      params: "{{ my_jenkins_params }}"
-
   - name: Install Git plugin
     jenkins_plugin:
       name: git
       params: "{{ my_jenkins_params }}"
+    retries: 3
+
+  - name: Install Docker Build Step plugin
+    jenkins_plugin:
+      name: docker-build-step
+      params: "{{ my_jenkins_params }}"
+    retries: 3
+
 
   - name: Install NodeJs plugin
     jenkins_plugin:
       name: nodejs
       params: "{{ my_jenkins_params }}"
+    retries: 3
