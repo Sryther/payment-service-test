@@ -113,33 +113,33 @@ The configuration can be edited in the `docker-compose.yml` file.
 
 ### Required Node.js et npm : 
 
-    Sudo apt-get install nodejs
-    Sudo apt-get install nodejs-legacy
-    Sudo apr-get install npm
+    sudo apt-get install nodejs
+    sudo apt-get install nodejs-legacy
+    sudo apr-get install npm
 
 ### Generator install:
 
-    Sudo npm -g yo generator-hubot
-    Npm install generator-angular
-    Npm install generator-karma@>=0.9.0
+    sudo npm -g yo generator-hubot
+    npm install generator-angular
+    npm install generator-karma@>=0.9.0
 
 ### Persistence :
 
-    Npm install hubot-redis-brain
+    npm install hubot-redis-brain
 
 ### Creating bot folder :
 
-    Cd Documents
-    Mkdir jarvis
-    Cd jarvis
+    cd Documents
+    mkdir jarvis
+    cd jarvis
 
 ### Creating bot : 
 
-    Yo hubot
+    yo hubot
 
 ### Running :
 
-    Bin/hubot
+    bin/hubot
         
 ## Tests
 
